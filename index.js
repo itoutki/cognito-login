@@ -43,10 +43,6 @@ if (clientId === undefined) {
     process.exit(-1);
 }
 
-console.log(region);
-console.log(userPoolId);
-console.log(clientId);
-
 Amplify.default.configure({
     Auth: {
         region: region,
@@ -69,9 +65,8 @@ Auth.signIn(options.user, options.password)
     })
     .then(user => Auth.currentSession())
     .then(data => {
-        console.log(data.getIdToken().getJwtToken());
+        console.log('{"id_token":"' + data.getIdToken().getJwtToken() + '","access_token":"' + data.getAccessToken().getJwtToken() + '"}')
     })
     .catch(err => {
         console.log(err);
     })
-
